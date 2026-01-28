@@ -107,7 +107,7 @@ function showQuestion() {
 
     currentQuestionSpan.textContent = currentQuestionIndex + 1;
 
-    const progressProtect = (currentQuestionIndex / quizQuestions.length) * 100;
+    const progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
     progressBar.style.width = progressPercent + "%";
     
     questionText.textContent = currentQuestion.question;
@@ -131,36 +131,33 @@ function showQuestion() {
 
 function selectAnswer(event) {
     // optimization check
-    if(answersDisabled) return;
+    if (answersDisabled) return;
 
     answersDisabled = true;
 
-    const selectedButtton = event.target;
-    const isCorrect = selectedButtton.dataset.correct === "true"
-};
+    const selectedButton = event.target;
+    const isCorrect = selectedButton.dataset.correct === "true";
 
     // todo: explain this in a sec
     // Here Array.from() is used to convert the NodeList returned by answersContainer.children into an array, this is because the NodeList is not an array and we need to use the forEach method
-
     Array.from(answersContainer.children).forEach((button) => {
-        if(button.dataset.correct ==="true") {
-            button.classList.add("corect");
-        } else if (button === selectedButtton) {
+        if (button.dataset.correct === "true") {
+            button.classList.add("correct");
+        } else if (button === selectedButton) {
             button.classList.add("incorrect");
         }
-});
+    });
 
-    if(isCorrect) {
+    if (isCorrect) {
         score++;
         scoreSpan.textContent = score;
     }
 
-    function selectAnswer(event) {
     setTimeout(() => {
-      currentQuestionIndex++;
+        currentQuestionIndex++;
 
         // check if there are more questions or if the quiz is over
-        if(currentQuestionIndex < quizQuestions.length) {
+        if (currentQuestionIndex < quizQuestions.length) {
             showQuestion();
         } else {
             showResult();
