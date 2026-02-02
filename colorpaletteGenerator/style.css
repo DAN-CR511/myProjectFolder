@@ -1,5 +1,6 @@
 /* BASIC RESET */
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +9,6 @@
 }
 
 body {
-    background: red;
     background: linear-gradient(135deg, #83a8df, #c3cfe2);
     min-height: 100vh;
     display: flex;
@@ -76,12 +76,12 @@ h1::after {
 .color-btn {
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
 }
 
 .color-btn:hover {
-    translate: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .color {
@@ -90,7 +90,7 @@ h1::after {
 }
 
 .color-info {
-    background-color: #ffffff;
+    background-color: #fff;
     padding: 0.7rem;
     display: flex;
     align-items: center;
@@ -106,7 +106,7 @@ h1::after {
 .copy-btn {
     cursor: pointer;
     color: #64748b;
-    transition: color 0.2s;
+    transition: color 0.3s;
 }
 
 .copy-btn:hover {
