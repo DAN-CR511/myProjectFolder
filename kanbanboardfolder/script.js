@@ -1,4 +1,4 @@
-const cards = document.querySelectorAll(".cards");
+const cards = document.querySelectorAll(".card");
 const lists = document.querySelectorAll(".list");
 
 for(const card of cards) {
