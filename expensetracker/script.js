@@ -51,21 +51,26 @@ function createTransactionElement(transaction) {
     li.classList.add("transaction");
     li.classList.add(transaction.amount > 0 ? "income" : "expense");
 
-    // todo: update the amount formatting
+    // Add minus sign for expenses
+    const formattedAmount =
+        transaction.amount > 0
+            ? formatCurrency(transaction.amount)
+            : `-${formatCurrency(Math.abs(transaction.amount))}`;
+
     li.innerHTML = `
-    <span>${transaction.description}</span>
-    <span>
-    
-    ${transaction.amount}
-      <button 
-       type="button"
-       class="delete-btn" 
-    onclick="removeTransaction(${transaction.id})">X</button>
-    </span>
+        <span>${transaction.description}</span>
+        <span>
+            ${formattedAmount}
+            <button 
+                type="button"
+                class="delete-btn" 
+                onclick="removeTransaction(${transaction.id})">X</button>
+        </span>
     `;
 
     return li;
 }
+
 
 function updateSummary () {
 
@@ -85,7 +90,18 @@ function updateSummary () {
     .reduce((acc, transaction) => acc + transaction.amount, 0);
 
     // update ui => Todo: fix the formatting
-    balanceEL.textContent = balance;
-    incomeAmountEL.textContent = income;
-    expenseAmountEL.textContent = expenses;
+    balanceEL.textContent = formatCurrency(balance);
+    incomeAmountEL.textContent = formatCurrency(income);
+    expenseAmountEL.textContent = formatCurrency(expenses);
 }
+
+function formatCurrency(number) {
+    return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+    }).format(number);
+}
+
+// initial render
+updateSummary();
+updateTransactionsList();
