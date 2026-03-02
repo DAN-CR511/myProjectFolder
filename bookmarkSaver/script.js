@@ -37,7 +37,8 @@ function addBookmark(name,url){
     removeButton.textContent = "Remove";
     removeButton.addEventListener("click", function () {
         bookmarkList.removeChild(li);
-        removeBookmark(name, url);
+    removeBookmarkFromStorage(name, url);
+
     })
     
     li.appendChild(link);
@@ -57,4 +58,13 @@ function saveBookmark(name, url) {
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 }
 
-function loadBookmarks() {}
+function loadBookmarks() {
+    const bookmarks = getBookmarksFromStorage();
+    bookmarks.forEach((bookmark) => addBookmark(bookmark.name,bookmark.url));
+}
+
+function removeBookmarkFromStorage(name, url) {
+    let bookmarks = getBookmarksFromStorage();
+    bookmarks = bookmarks.filter((bookmark) => bookmark.name !== name || bookmark.url !== url);
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+}
