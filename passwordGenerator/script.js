@@ -9,9 +9,9 @@ const generateButton = document.getElementById("generate-btn");
 const copyButton = document.getElementById("copy-btn");
 const strengthBar = document.querySelector(".strength-bar");
 const strengthText = document.querySelector(".strength-container p");
+const strengthLabel = document.getElementById("strength-label");
 
 // CHARACTER SET
-
 const uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
 const numberCharacters = "0123456789";
@@ -42,22 +42,22 @@ function makePassword() {
 }
 
 function updateStrengthMeter(password) {
-    const passowrdLength = passowrd.length;
+    const passwordLength = password.length;
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
     const hasNumber = /[0-9]/.test(password);
-    const hasSymbol = /[!@#$%^&*()-_=+[]{}|;:,.<>?/.test(password);
+    const hasSymbol = /[!@#$%^&*()\-_=+\[\]{}|;:,.<>?]/.test(password);
 
     let strengthScore = 0;
 
     // here the .min will get the minimum value
     // but this will make sure that "at maximum" you would get 40
-    strengthScore += Math.min(passowrdLength * 2, 40);
+    strengthScore += Math.min(passwordLength * 2, 40);
 
     if(hasUppercase) strengthScore += 15;
     if(hasLowercase) strengthScore += 15;
     if(hasNumber) strengthScore += 15;
-    if(hasSymbols) strengthScore += 15;
+    if(hasSymbol) strengthScore += 15;
 
     // enforce minimum score for every short password.
     if(passwordLength < 8) {
@@ -84,6 +84,9 @@ function updateStrengthMeter(password) {
         barColor = "#68d391"; // green
         strengthLabelTest = "Strong";
     }
+
+    strengthBar.style.backgroundColor = barColor;
+    strengthLabel.textContent = strengthLabelTest;
 }
 
 function createRandomPassword(
