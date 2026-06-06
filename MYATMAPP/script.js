@@ -1,79 +1,71 @@
 let balance = 300000;
-
 const pin = 2345;
 
 // LOGIN FUNCTION
 
 function login() {
-  const correctPin = 2345;
-  const enteredPin = Number(prompt("Enter PIN"));
+  const Pin = 2345;
+  const correctPin = prompt("Enter PIN");
 
-  if (enteredPin === correctPin) {
+  if (Pin !== correctPin) {
     alert("Login Successful");
-
-    atmmMenu();
   } else {
     alert("Incorrect PIN");
   }
 }
 
-// ATM MENU FUNCTION.
-function atmMenu() {
+let running = true;
+while (running) {
   const option = prompt(
     `
-    ========= ATM MENU ==========
+    
 
-    1. Check Balance
-    2. withdraw.
+    1. CheckBalance
+    2. Withdraw.
     3. Deposit.
     4. Exit.
 
     Choose an option (1-4);
-    `
+    `,
   );
+}
+  switch (option) {
+    case "1":
+      checkBalance();
+      break;
 
-  // CHECK BALANCE...
+    case "2":
+      deposit();
+      break;
 
-  if(option === "1") {
-    checkBalance();
-  }
-  // DEPOSIT MONEY.
+    case "3":
+      withdraw();
+      break;
 
-  else if (option === "2") {
-    depositMoney();
-  }
+    case "4":
+      alert("Thank you for using our ATM");
+      isRunning = false;
+      break;
 
-  else if (option === "3") {
-    withdrawMoney();
-  }
-
-  // EXIT.
-  else if (option === "4") {
-    alert("Thank you for using our ATM");
-  }
-
-  // INVALID OPTION.
-  else {
-    alert("Invalid Option");
-
-    atmMenu();
+    default:
+      alert("Invalid option");
   }
 
   // CHECK BALANCE FUNCTION.
 
   function checkBalance() {
-    alert(`Your current balance is N${"Balance"}`);
+    alert(`Your current balance is N${"checkBalance"}`);
 
     atmMenu();
   }
 
   // DEPOSIT MONEY FUNCTION.
 
-  function depositMoney() {
-    const amount = Number(prompt("Enter the amount to deposit"));
+  function deposit() {
+    const amount = prompt("Enter amount");
 
     // VALIDATION.
-    if (amount > 0){
+    if (amount > 0) {
       balance += amount;
       alert(`Deposit Successful
         New Balance: n${balance}`);
@@ -84,26 +76,26 @@ function atmMenu() {
     atmMenu();
   }
 
- // WITHDRAW FUNCTION.
- function withdrawMoney()  {
-  const amount = Number(prompt("Enter the amount to withdraw"));
+  // WITHDRAW FUNCTION.
+ function withdraw() {
 
-  if (amount <= 0) {
-    alert("Invalid Amount");
-  }
+    const amount = Number(prompt("Enter amount"));
 
-  else if(amount > balance) {
-    alert("Insufficient Balance");
-  }
+    if (amount <= 0) {
 
-  else {
-    balance -= amount;
-    alert(`Withdrawal Successful
-   Remaining Balance: N${balance}`);
-  }
+        alert("Invalid Amount");
 
-  atmMenu();
- }
+    } else if (amount > balance) {
+
+        alert("Insufficient Balance");
+
+    } else {
+
+        balance -= amount;
+
+        alert(`Withdrawal Successful
+Remaining Balance: N${balance}`);
+    }
 }
-    
-    login();
+
+login();
