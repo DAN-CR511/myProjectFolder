@@ -29,55 +29,51 @@ while (running) {
     `,
   );
 }
-  switch (option) {
-    case "1":
-      checkBalance();
-      break;
+switch (option) {
+  case "1":
+    checkBalance();
+    break;
 
-    case "2":
-      deposit();
-      break;
+  case "2":
+    deposit();
+    break;
 
-    case "3":
-      withdraw();
-      break;
+  case "3":
+    withdraw();
+    break;
 
-    case "4":
-      alert("Thank you for using our ATM");
-      isRunning = false;
-      break;
+  case "4":
+    alert("Thank you for using our ATM");
+    isRunning = false;
+    break;
 
-    default:
-      alert("Invalid option");
+  default:
+    alert("Invalid option");
+}
+
+// CHECK BALANCE FUNCTION.
+
+function checkBalance() {
+    alert(`Your current balance is ₦${balance}`);
+}
+
+// DEPOSIT MONEY FUNCTION.
+function deposit() {
+  const amount = Number(prompt("Enter amount"));
+
+  if (amount > 0) {
+    balance += amount;
+
+    alert(`Deposit Successful
+New Balance: ₦${balance}`);
+
+  } else {
+    alert("Invalid Amount");
   }
+}
 
-  // CHECK BALANCE FUNCTION.
-
-  function checkBalance() {
-    alert(`Your current balance is N${"checkBalance"}`);
-
-    atmMenu();
-  }
-
-  // DEPOSIT MONEY FUNCTION.
-
-  function deposit() {
-    const amount = prompt("Enter amount");
-
-    // VALIDATION.
-    if (amount > 0) {
-      balance += amount;
-      alert(`Deposit Successful
-        New Balance: n${balance}`);
-    } else {
-      alert("Invalid Amount");
-    }
-
-    atmMenu();
-  }
-
-  // WITHDRAW FUNCTION.
- function withdraw() {
+// WITHDRAW FUNCTION.
+function withdraw() {
 
     const amount = Number(prompt("Enter amount"));
 
@@ -97,5 +93,4 @@ while (running) {
 Remaining Balance: N${balance}`);
     }
 }
-
 login();
